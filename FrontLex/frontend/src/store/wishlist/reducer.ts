@@ -1,42 +1,33 @@
-import {CREATE_GAME, DELETE_GAME, UPDATE_GAME} from "./types";
-import {Game, VideoGamesState} from "../../models/store";
-import {SET_GAMES} from "./types";
+import {DELETE_GAME, ADD_GAME, UPDATE_GAME} from "./types";
+import {Game, VideoGamesState, WishListState} from "../../models/store";
 
 
 const initialState = {
-    games: [],
+    wishlist: [],
     num: 0
 };
 
-const gameReducer = (state: VideoGamesState = initialState, action: any): VideoGamesState => {
+const wishlistReducer = (state: WishListState = initialState, action: any): WishListState => {
         const {type, payload} = action;
         switch (type) {
-            case SET_GAMES:
-                return {
-                    ...state,
-                    games: payload.data as Game[],
-                    num: payload.data.length
-                };
-            case CREATE_GAME:
+            case ADD_GAME:
                 state.num += 1;
-                action.payload.gameID = state.num;
-
                 return {
                     ...state,
-                    games: [...state.games, action.payload],
+                    wishlist: [...state.wishlist, action.payload],
                 }
             case DELETE_GAME:
                 state.num -= 1;
                 return {
                     ...state,
-                    games: [...state.games.filter(game => game.gameID !== action.payload)]
+                    wishlist: [...state.wishlist.filter(game => game.gameID !== action.payload)]
                 };
 
             case UPDATE_GAME:
                 return {
                     ...state,
-                    games: [
-                        ...state.games.map(game => {
+                    wishlist: [
+                        ...state.wishlist.map(game => {
                                 if (game.gameID === action.payload.gameID) {
                                     game.gameName = action.payload.gameName;
                                     game.rating = action.payload.rating
@@ -58,4 +49,4 @@ const gameReducer = (state: VideoGamesState = initialState, action: any): VideoG
     }
 ;
 
-export default gameReducer;
+export default wishlistReducer;

@@ -9,51 +9,73 @@ import {createGame, updateGame} from "../../store/videogames/actions";
 import {GameFormProps, GameTableRowProps} from "../../models/videogame";
 
 const VideoGameForm: React.FC<GameFormProps> = ({
-                                                    id,
-                                                    name,
+                                                    gameID,
+                                                    gameName,
                                                     releaseYear,
                                                     company,
                                                     rating,
                                                     sales,
                                                     platform,
+                                                    description,
+                                                    imageLink,
+                                                    isWishlist
                                                 }: GameFormProps): React.ReactElement => {
     const dispatch = useDispatch();
 
     const [selection, setSelection] = useState<{
-        id: number | null;
-        name: string;
+        gameID: number | null;
+        gameName: string;
         company: string;
         rating: number | null;
         releaseYear: number | null;
         platform: string; sales: number | null;
+        imageLink: string; description: string;
+        isWishlist: boolean
     }>({
-        id: null,
-        name: "",
+        gameID: null,
+        gameName: "",
         company: "",
         rating: null,
         releaseYear: null,
         platform: "",
-        sales: null
+        sales: null,
+        imageLink: "",
+        description: "",
+        isWishlist: false
     })
 
     useEffect(() => setSelection({
-        id: id,
-        name: name,
+        gameID: gameID,
+        gameName: gameName,
         sales: sales,
         releaseYear: releaseYear,
         company: company,
         rating: rating,
-        platform: platform
-    }), [id, name, releaseYear, company, rating, sales, platform])
+        platform: platform,
+        imageLink: imageLink,
+        description: description,
+        isWishlist: isWishlist
+    }), [gameID, gameName, releaseYear, company, rating, sales, platform, description, imageLink, isWishlist])
 
     const onInputSubmit = () => {
         console.log(selection)
-        selection.id === null ? dispatch(createGame(selection)) : dispatch(updateGame(selection))
+        selection.gameID === null ? dispatch(createGame(selection)) : dispatch(updateGame(selection))
     }
 
     const clearSelection = () => {
         console.log(selection)
-        setSelection({id: null, name: "", company: "", rating: null, releaseYear: null, platform: "", sales: null})
+        setSelection({
+            gameID: null,
+            gameName: "",
+            company: "",
+            rating: null,
+            releaseYear: null,
+            platform: "",
+            sales: null,
+            description: "",
+            imageLink: "",
+            isWishlist: false
+        })
     }
 
     const form = useRef(null)
@@ -66,16 +88,16 @@ const VideoGameForm: React.FC<GameFormProps> = ({
                     <Col>
                         <Form.Group className="mb-3" controlId="formId">
                             <Form.Label>Id:</Form.Label>
-                            <Form.Control value={selection.id ? selection.id : ""} type="text" placeholder=""
+                            <Form.Control value={selection.gameID ? selection.gameID : ""} type="text" placeholder=""
                                           disabled readOnly/>
                         </Form.Group>
                     </Col>
                     <Col>
                         <Form.Group className="mb-1" controlId="formName">
                             <Form.Label>Name:</Form.Label>
-                            <Form.Control value={selection.name ? selection.name : ""}
+                            <Form.Control value={selection.gameName ? selection.gameName : ""}
                                           onChange={(e) => {
-                                              setSelection({...selection!, name: e.target.value}
+                                              setSelection({...selection!, gameName: e.target.value}
                                               )
                                           }}
                                           type="text" placeholder=""/>
@@ -142,6 +164,28 @@ const VideoGameForm: React.FC<GameFormProps> = ({
                                           onChange={e => setSelection({
                                               ...selection!,
                                               platform: e.target.value
+                                          })} type="text" placeholder=""/>
+                        </Form.Group>
+                    </Col>
+
+                    <Col><Form.Group className="mb-1" controlId="formImageLink">
+                        <Form.Label>Image Link:</Form.Label>
+                        <Form.Control value={selection ? selection!.imageLink : ""}
+                                      onChange={e => setSelection({
+                                          ...selection!,
+                                          imageLink: e.target.value
+                                      })} type="text" placeholder=""/>
+                    </Form.Group></Col>
+                </Row>
+
+                <Row>
+                    <Col>
+                        <Form.Group className="mb-1" controlId="formDescription">
+                            <Form.Label>Description:</Form.Label>
+                            <Form.Control value={selection ? selection!.description : ""}
+                                          onChange={e => setSelection({
+                                              ...selection!,
+                                              description: e.target.value
                                           })} type="text" placeholder=""/>
                         </Form.Group>
                     </Col>

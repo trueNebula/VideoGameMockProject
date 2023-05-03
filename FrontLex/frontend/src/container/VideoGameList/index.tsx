@@ -4,13 +4,17 @@ import {useDispatch, useSelector} from "react-redux";
 import {FrontLexStore} from "../../models/store";
 import VideoGameTableRow from "../../components/VideoGameTableRow";
 import {Game} from "../../models/store";
+import Grid from '@mui/material/Grid';
 import {deleteGame} from "../../store/videogames/actions";
 import {setGame} from "../../store/videogameform/actions";
+import VideoGameCard from "../../components/VideoGameCard";
+import {deleteWishlistGame} from "../../store/wishlist/actions";
 
 const VideoGameList: React.FC = (): React.ReactElement => {
     const {
         videoGames: {games},
-        gameState: {game}
+        gameState: {game},
+        wishlistState: {wishlist}
     } = useSelector((state: FrontLexStore) => state);
 
     const dispatch = useDispatch();
@@ -18,58 +22,67 @@ const VideoGameList: React.FC = (): React.ReactElement => {
     const handleDeleteGame = (id: number) => {
         console.log(id)
         dispatch(deleteGame(id));
+        dispatch(deleteWishlistGame(id));
     }
 
     const handleOnClick = (game: Game) => {
-        console.log(game.id)
+        console.log(game.gameID)
         dispatch(setGame(game))
     }
 
     return (
-        <Table striped bordered hover>
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Release Year</th>
-                <th>Company</th>
-                <th>Rating</th>
-                <th>Sales</th>
-                <th>Platform</th>
-                <th>Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            {games.map(({platform, id, name, sales, releaseYear, company, rating}, index) => (
-                <VideoGameTableRow key={index}
+        <Grid container spacing={{xs: 2, md: 3}} columns={{xs: 4, sm: 8, md: 12}}>
+            {games.map(({
+                            platform,
+                            gameID,
+                            gameName,
+                            sales,
+                            releaseYear,
+                            company,
+                            rating,
+                            imageLink,
+                            description,
+                            isWishlist
+                        }, index) => (
+                <Grid item xs={2} sm={4} md={4} key={index}>
+                    <VideoGameCard key={index}
                                    platform={platform}
-                                   name={name}
+                                   gameName={gameName}
                                    sales={sales}
-                                   id={id}
+                                   gameID={gameID}
                                    releaseYear={releaseYear}
                                    company={company}
                                    rating={rating}
                                    handleOnClickCallback={({
-                                                               id,
-                                                               name,
+                                                               gameID,
+                                                               gameName,
                                                                sales,
                                                                releaseYear,
                                                                company,
                                                                rating,
-                                                               platform
+                                                               platform,
+                                                               description,
+                                                               imageLink
                                                            }) => handleOnClick({
-                                       id,
-                                       name,
+                                       gameID: gameID,
+                                       gameName: gameName,
                                        sales,
                                        releaseYear,
                                        company,
                                        rating,
-                                       platform
+                                       platform,
+                                       imageLink,
+                                       description,
+                                       isWishlist
                                    })}
-                                   deleteGameCallback={(id) => handleDeleteGame(id)}
-
-                />))}
-            </tbody>
-        </Table>
+                                   deleteGameCallback={(gameID) => handleDeleteGame(gameID)}
+                                   imageLink={imageLink}
+                                   description={description}
+                                   isWishlist={isWishlist}
+                    />
+                </Grid>
+            ))}
+        </Grid>
     )
 }
 

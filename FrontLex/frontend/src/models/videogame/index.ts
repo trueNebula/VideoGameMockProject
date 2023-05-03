@@ -1,11 +1,16 @@
+import {IconButtonProps} from "@mui/material/IconButton"
+
 interface Game {
-    id: number | null,
-    name: string,
+    gameID: number | null,
+    gameName: string,
     releaseYear: number | null,
     company: string,
     rating: number | null,
     sales: number | null,
     platform: string,
+    imageLink: string,
+    description : string
+    isWishlist: boolean
 }
 
 export interface GameTableRowProps extends Game {
@@ -16,5 +21,9 @@ export interface GameTableRowProps extends Game {
 }
 
 export interface GameFormProps extends Game {
+
+}
+
+export interface VideoGameCardProps extends IconButtonProps, GameTableRowProps {
 }
 

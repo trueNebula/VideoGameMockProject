@@ -4,13 +4,15 @@ import {Game, VideoGamesState, VideoGameState} from "../../models/store";
 
 const initialState = {
     game: {
-        id: null,
-        name: "",
+        gameID: null,
+        gameName: "",
         company: "",
         rating: null,
         releaseYear: null,
         platform: "",
-        sales: null
+        sales: null,
+        description:"",
+        imageLink:""
     } as Game
 };
 

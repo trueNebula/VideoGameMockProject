@@ -15,13 +15,16 @@ const VideoGameFormContainer: React.FC = (): React.ReactElement => {
 
     return (
         <VideoGameForm
-            id={game.id}
+            gameID={game.gameID}
             platform={game.platform}
-            name={game.name}
+            gameName={game.gameName}
             sales={game.sales}
             releaseYear={game.releaseYear}
             company={game.company}
             rating={game.rating}
+            imageLink={game.imageLink}
+            description={game.description}
+            isWishlist={game.isWishlist}
         />
     )
 }

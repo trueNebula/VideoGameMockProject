@@ -15,6 +15,7 @@ const CustomNavbar: React.FC = () : React.ReactElement => {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link href="/">Video Games</Nav.Link>
+                            <Nav.Link href="/wishlist" >Wishlist</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
