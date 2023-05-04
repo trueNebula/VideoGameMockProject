@@ -11,7 +11,7 @@ const VideoGameTableRow: React.FC<GameTableRowProps> = ({
                                                             rating,
                                                             sales,
                                                             platform,
-                                                            handleOnClickCallback,
+                                                            onClickCallback,
                                                             deleteGameCallback,
                                                             isFiltered,
                                                             noDelete,
@@ -25,7 +25,7 @@ const VideoGameTableRow: React.FC<GameTableRowProps> = ({
     }
     const handleClick = (e: any) => {
         e.preventDefault()
-        handleOnClickCallback({
+        onClickCallback({
             gameID: gameID,
             gameName: gameName,
             releaseYear,

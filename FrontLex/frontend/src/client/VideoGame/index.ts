@@ -4,7 +4,7 @@ export const getVideoGamesAPI = async (): Promise<any> => {
     try {
         // call to backend
         const dummyResponse = [{
-            gameID: 0,
+            gameID: 1,
             gameName: 'Dota2',
             releaseYear: 2000,
             company: 'Marvel',
@@ -16,7 +16,7 @@ export const getVideoGamesAPI = async (): Promise<any> => {
             isWishlist: false
 
         }, {
-            gameID: 1,
+            gameID: 2,
             gameName: 'LoL',
             releaseYear: 2000,
             company: 'Marvel',
@@ -27,7 +27,7 @@ export const getVideoGamesAPI = async (): Promise<any> => {
             description: "placeholder description for LoL",
             isWishlist: false
         }, {
-            gameID: 2,
+            gameID: 3,
             gameName: 'Fifa',
             releaseYear: 2000,
             company: 'Marvel',

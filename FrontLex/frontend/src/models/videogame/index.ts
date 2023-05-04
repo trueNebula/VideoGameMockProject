@@ -14,7 +14,7 @@ interface Game {
 }
 
 export interface GameTableRowProps extends Game {
-    handleOnClickCallback: (placeholder: Game) => void,
+    onClickCallback: (placeholder: Game) => void,
     deleteGameCallback: (id: number) => void,
     isFiltered?: boolean,
     noDelete?: boolean
@@ -25,5 +25,6 @@ export interface GameFormProps extends Game {
 }
 
 export interface VideoGameCardProps extends IconButtonProps, GameTableRowProps {
+    wishlistCallback: (game: Game) => void
 }
 

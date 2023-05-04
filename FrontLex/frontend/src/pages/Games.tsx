@@ -11,13 +11,6 @@ import VideoGameFormContainer from "../container/VideoGameFormContainer";
 
 
 const Games = () => {
-    const dispatch = useDispatch();
-
-    useEffect(()=>{
-        // @ts-ignore
-        dispatch(getGames())
-    }, [])
-
 
     return (
         <>

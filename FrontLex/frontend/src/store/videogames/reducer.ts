@@ -10,16 +10,18 @@ const initialState = {
 
 const gameReducer = (state: VideoGamesState = initialState, action: any): VideoGamesState => {
         const {type, payload} = action;
+        console.log("VIDEOGAMES", action)
+
         switch (type) {
             case SET_GAMES:
+                console.log(state)
                 return {
-                    ...state,
                     games: payload.data as Game[],
-                    num: payload.data.length
+                    num: state.games.length
                 };
             case CREATE_GAME:
                 state.num += 1;
-                action.payload.gameID = state.num;
+                action.payload.gameID = Math.floor(Math.random() * 1000);
 
                 return {
                     ...state,
@@ -46,6 +48,8 @@ const gameReducer = (state: VideoGamesState = initialState, action: any): VideoG
                                     game.platform = action.payload.platform
                                     game.imageLink = action.payload.imageLink
                                     game.description = action.payload.description
+                                    game.isWishlist = action.payload.isWishlist
+
                                 }
                                 return game;
                             }

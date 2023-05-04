@@ -1,4 +1,4 @@
-import {DELETE_GAME, ADD_GAME, UPDATE_GAME} from "./types";
+import {ADD_GAME_WISHLIST, UPDATE_GAME_WISHLIST, DELETE_GAME_WISHLIST} from "./types";
 import {Game, VideoGamesState, WishListState} from "../../models/store";
 
 
@@ -9,21 +9,24 @@ const initialState = {
 
 const wishlistReducer = (state: WishListState = initialState, action: any): WishListState => {
         const {type, payload} = action;
+        console.log("WISHLIST", action)
+
         switch (type) {
-            case ADD_GAME:
+            case ADD_GAME_WISHLIST:
+                //TODO: check unique
                 state.num += 1;
                 return {
                     ...state,
                     wishlist: [...state.wishlist, action.payload],
                 }
-            case DELETE_GAME:
+            case DELETE_GAME_WISHLIST:
                 state.num -= 1;
                 return {
                     ...state,
                     wishlist: [...state.wishlist.filter(game => game.gameID !== action.payload)]
                 };
 
-            case UPDATE_GAME:
+            case UPDATE_GAME_WISHLIST:
                 return {
                     ...state,
                     wishlist: [

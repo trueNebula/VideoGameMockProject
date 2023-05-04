@@ -32,7 +32,6 @@ const updateGame = (data: Game) => {
     return {
         type: UPDATE_GAME,
         payload: data
-
     };
 };
 

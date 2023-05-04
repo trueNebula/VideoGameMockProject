@@ -1,9 +1,9 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {FrontLexStore} from "../../models/store";
+import {FrontLexStore, Game} from "../../models/store";
 import Grid from '@mui/material/Grid';
 import VideoGameCard from "../../components/VideoGameCard";
-import {deleteWishlistGame} from "../../store/wishlist/actions";
+import {addWishlistGame, deleteWishlistGame} from "../../store/wishlist/actions";
 
 const WishlistContainer: React.FC = (): React.ReactElement => {
     const {
@@ -15,10 +15,12 @@ const WishlistContainer: React.FC = (): React.ReactElement => {
     const dispatch = useDispatch();
 
     const handleDeleteGame = (id: number) => {
-        console.log(id)
         dispatch(deleteWishlistGame(id));
     }
 
+    const handleWishlist = (g: Game) => {
+        g.isWishlist ? dispatch(addWishlistGame(g)) : dispatch(deleteWishlistGame(g.gameID))
+    }
 
     return (
         <Grid container spacing={{xs: 2, md: 3}} columns={{xs: 4, sm: 8, md: 12}}>
@@ -43,8 +45,31 @@ const WishlistContainer: React.FC = (): React.ReactElement => {
                                    releaseYear={releaseYear}
                                    company={company}
                                    rating={rating}
-                                   handleOnClickCallback={() => null}
+                                   onClickCallback={() => null}
                                    deleteGameCallback={(gameID) => handleDeleteGame(gameID)}
+                                   wishlistCallback={({
+                                                          platform,
+                                                          gameID,
+                                                          gameName,
+                                                          sales,
+                                                          releaseYear,
+                                                          company,
+                                                          rating,
+                                                          imageLink,
+                                                          description,
+                                                          isWishlist
+                                                      }) => handleWishlist({
+                                       platform,
+                                       gameID,
+                                       gameName,
+                                       sales,
+                                       releaseYear,
+                                       company,
+                                       rating,
+                                       imageLink,
+                                       description,
+                                       isWishlist
+                                   })}
                                    imageLink={imageLink}
                                    description={description}
                                    isWishlist={isWishlist}

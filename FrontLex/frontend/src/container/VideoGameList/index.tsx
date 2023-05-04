@@ -1,14 +1,15 @@
 import {Table} from "react-bootstrap";
-import React from "react";
+import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {FrontLexStore} from "../../models/store";
 import VideoGameTableRow from "../../components/VideoGameTableRow";
 import {Game} from "../../models/store";
 import Grid from '@mui/material/Grid';
-import {deleteGame} from "../../store/videogames/actions";
+import {deleteGame, updateGame} from "../../store/videogames/actions";
 import {setGame} from "../../store/videogameform/actions";
 import VideoGameCard from "../../components/VideoGameCard";
-import {deleteWishlistGame} from "../../store/wishlist/actions";
+import {addWishlistGame, deleteWishlistGame} from "../../store/wishlist/actions";
+import {getGames} from "../../store/videogames/operations";
 
 const VideoGameList: React.FC = (): React.ReactElement => {
     const {
@@ -19,16 +20,29 @@ const VideoGameList: React.FC = (): React.ReactElement => {
 
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        if (games.length === 0)
+            // @ts-ignore
+            dispatch(getGames())
+    }, [])
+
     const handleDeleteGame = (id: number) => {
-        console.log(id)
+        console.log("HANDLE DELETE GAME FROM LIST", id)
         dispatch(deleteGame(id));
         dispatch(deleteWishlistGame(id));
     }
 
-    const handleOnClick = (game: Game) => {
-        console.log(game.gameID)
-        dispatch(setGame(game))
+    const handleWishlistUpdate = (g: Game) => {
+        console.log("HANDLE WISHLIST", g)
+        dispatch(updateGame(g))
+        g.isWishlist ? dispatch(addWishlistGame(g)) : dispatch(deleteWishlistGame(g.gameID))
     }
+
+    const handleOnClick = (g: Game) => {
+        console.log(g.gameID)
+        dispatch(setGame(g))
+    }
+
 
     return (
         <Grid container spacing={{xs: 2, md: 3}} columns={{xs: 4, sm: 8, md: 12}}>
@@ -53,7 +67,7 @@ const VideoGameList: React.FC = (): React.ReactElement => {
                                    releaseYear={releaseYear}
                                    company={company}
                                    rating={rating}
-                                   handleOnClickCallback={({
+                                   onClickCallback={({
                                                                gameID,
                                                                gameName,
                                                                sales,
@@ -62,7 +76,8 @@ const VideoGameList: React.FC = (): React.ReactElement => {
                                                                rating,
                                                                platform,
                                                                description,
-                                                               imageLink
+                                                               imageLink,
+                                                               isWishlist
                                                            }) => handleOnClick({
                                        gameID: gameID,
                                        gameName: gameName,
@@ -76,6 +91,27 @@ const VideoGameList: React.FC = (): React.ReactElement => {
                                        isWishlist
                                    })}
                                    deleteGameCallback={(gameID) => handleDeleteGame(gameID)}
+                                   wishlistCallback={({
+                                                          gameID,
+                                                          gameName,
+                                                          sales,
+                                                          releaseYear,
+                                                          company,
+                                                          rating,
+                                                          platform,
+                                                          description,
+                                                          imageLink, isWishlist
+                                                      }) => handleWishlistUpdate({
+                                       gameID,
+                                       gameName,
+                                       sales,
+                                       releaseYear,
+                                       company,
+                                       rating,
+                                       platform,
+                                       description,
+                                       imageLink, isWishlist
+                                   })}
                                    imageLink={imageLink}
                                    description={description}
                                    isWishlist={isWishlist}

@@ -17,7 +17,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {GameTableRowProps, VideoGameCardProps} from "../../models/videogame";
 import {Delete} from "@mui/icons-material";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
@@ -31,21 +31,41 @@ const VideoGameCard: React.FC<VideoGameCardProps> = ({
                                                          rating,
                                                          sales,
                                                          platform,
-                                                         handleOnClickCallback,
+                                                         onClickCallback,
+                                                         wishlistCallback,
                                                          deleteGameCallback,
                                                          imageLink,
                                                          description,
                                                          isWishlist
                                                      }: VideoGameCardProps): React.ReactElement => {
 
-    const [inner, setInner] = useState(isWishlist)
+
 
     const handleDeleteGameCallback = () => {
         gameID && deleteGameCallback(gameID);
     }
-    const handleClick = (e: any) => {
+
+    const handleWishlistCallback = () => {
+        console.log(isWishlist)
+        isWishlist = !isWishlist;
+        console.log(isWishlist)
+
+        wishlistCallback({
+            gameID,
+            gameName,
+            releaseYear,
+            company,
+            rating,
+            sales,
+            platform,
+            imageLink,
+            description,
+            isWishlist
+        })
+    }
+    const handleClickCallback = (e: any) => {
         e.preventDefault()
-        handleOnClickCallback({
+        onClickCallback({
             gameID: gameID,
             gameName: gameName,
             releaseYear,
@@ -59,13 +79,8 @@ const VideoGameCard: React.FC<VideoGameCardProps> = ({
         })
     }
 
-    const handleWishlist = () => {
-        setInner(!inner);
-        isWishlist = !isWishlist;
-    }
-
     return (
-        <Card sx={{maxWidth: 345}} onClick={handleClick}>
+        <Card sx={{maxWidth: 345}} onClick={handleClickCallback}>
             <CardHeader
                 avatar={
                     <Avatar sx={{bgcolor: red[500]}} aria-label="game">
@@ -92,8 +107,8 @@ const VideoGameCard: React.FC<VideoGameCardProps> = ({
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites" onClick={handleWishlist}>
-                    <FavoriteIcon style={inner ? {fill: "red"} : {fill: "grey"}}/>
+                <IconButton aria-label="add to favorites" onClick={handleWishlistCallback}>
+                    <FavoriteIcon style={isWishlist ? {fill: "red"} : {fill: "grey"}}/>
                 </IconButton>
                 <IconButton aria-label="delete" onClick={handleDeleteGameCallback}>
                     <DeleteIcon/>
