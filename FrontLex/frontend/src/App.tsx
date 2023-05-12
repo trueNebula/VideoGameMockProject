@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Provider} from "react-redux"
 import store from "./Store";
@@ -8,6 +8,13 @@ import Wishlist from "./pages/Wishlist";
 
 
 function App() {
+
+    // userLogin ? return normal :  login form + error message (please try again, invalid)
+
+    const [userLogin, setUserLogin] = useState({})
+
+    // useContext --> docs
+    // higher order component (HOCs)
 
     return (
         <Provider store={store}>

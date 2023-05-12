@@ -1,27 +1,18 @@
 import * as React from 'react';
-import {styled} from '@mui/material/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
-import IconButton, {IconButtonProps} from '@mui/material/IconButton';
+import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import {red} from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import {GameTableRowProps, VideoGameCardProps} from "../../models/videogame";
-import {Delete} from "@mui/icons-material";
-import {useEffect, useState} from "react";
-
-interface ExpandMoreProps extends IconButtonProps {
-    expand: boolean;
-}
+import {VideoGameCardProps} from "../../models/videogame";
+import {Rating} from "@mui/material";
 
 const VideoGameCard: React.FC<VideoGameCardProps> = ({
                                                          gameID,
@@ -40,15 +31,15 @@ const VideoGameCard: React.FC<VideoGameCardProps> = ({
                                                      }: VideoGameCardProps): React.ReactElement => {
 
 
+    let randomColor = require('randomcolor');
 
+    //TODO: handle delete while in wishlist and deactivate wishlist status
     const handleDeleteGameCallback = () => {
         gameID && deleteGameCallback(gameID);
     }
 
     const handleWishlistCallback = () => {
-        console.log(isWishlist)
         isWishlist = !isWishlist;
-        console.log(isWishlist)
 
         wishlistCallback({
             gameID,
@@ -83,18 +74,15 @@ const VideoGameCard: React.FC<VideoGameCardProps> = ({
         <Card sx={{maxWidth: 345}} onClick={handleClickCallback}>
             <CardHeader
                 avatar={
-                    <Avatar sx={{bgcolor: red[500]}} aria-label="game">
+                    <Avatar sx={{bgcolor: randomColor({seed: gameName})}} aria-label="game">
                         {gameName.charAt(0)}
                     </Avatar>
                 }
-                action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon/>
-                    </IconButton>
-                }
                 title={gameName}
-                subheader={releaseYear}
+                style={{whiteSpace: 'pre-line'}}
+                subheader={"released: " + releaseYear + `\ncompany: ` + company + `\n`}
             />
+            <Rating name="read-only" value={rating} style={{margin:'0 0 0 20px'}} readOnly/>
             <CardMedia
                 component="img"
                 height="194"

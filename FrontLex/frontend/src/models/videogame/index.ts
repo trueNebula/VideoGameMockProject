@@ -9,7 +9,7 @@ interface Game {
     sales: number | null,
     platform: string,
     imageLink: string,
-    description : string
+    description: string
     isWishlist: boolean
 }
 
@@ -21,7 +21,9 @@ export interface GameTableRowProps extends Game {
 }
 
 export interface GameFormProps extends Game {
+    updateCallback: (game: Game) => void
 
+    createCallback: (game: Game) => void
 }
 
 export interface VideoGameCardProps extends IconButtonProps, GameTableRowProps {

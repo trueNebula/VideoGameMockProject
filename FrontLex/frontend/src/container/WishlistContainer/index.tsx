@@ -4,6 +4,7 @@ import {FrontLexStore, Game} from "../../models/store";
 import Grid from '@mui/material/Grid';
 import VideoGameCard from "../../components/VideoGameCard";
 import {addWishlistGame, deleteWishlistGame} from "../../store/wishlist/actions";
+import {updateGame} from "../../store/videogames/actions";
 
 const WishlistContainer: React.FC = (): React.ReactElement => {
     const {
@@ -19,7 +20,12 @@ const WishlistContainer: React.FC = (): React.ReactElement => {
     }
 
     const handleWishlist = (g: Game) => {
-        g.isWishlist ? dispatch(addWishlistGame(g)) : dispatch(deleteWishlistGame(g.gameID))
+        if(g.isWishlist)
+            dispatch(addWishlistGame(g));
+        else{
+            dispatch(deleteWishlistGame(g.gameID));
+            dispatch(updateGame(g))
+        }
     }
 
     return (
