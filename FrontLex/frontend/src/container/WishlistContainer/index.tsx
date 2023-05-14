@@ -5,6 +5,8 @@ import Grid from '@mui/material/Grid';
 import VideoGameCard from "../../components/VideoGameCard";
 import {addWishlistGame, deleteWishlistGame} from "../../store/wishlist/actions";
 import {updateGame} from "../../store/videogames/actions";
+import {Alert} from "@mui/material";
+import {render} from "react-dom";
 
 const WishlistContainer: React.FC = (): React.ReactElement => {
     const {
@@ -16,7 +18,7 @@ const WishlistContainer: React.FC = (): React.ReactElement => {
     const dispatch = useDispatch();
 
     const handleDeleteGame = (id: number) => {
-        dispatch(deleteWishlistGame(id));
+        alert("Cannot delete game from wishlist!")
     }
 
     const handleWishlist = (g: Game) => {

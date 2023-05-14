@@ -33,7 +33,6 @@ const VideoGameCard: React.FC<VideoGameCardProps> = ({
 
     let randomColor = require('randomcolor');
 
-    //TODO: handle delete while in wishlist and deactivate wishlist status
     const handleDeleteGameCallback = () => {
         gameID && deleteGameCallback(gameID);
     }
