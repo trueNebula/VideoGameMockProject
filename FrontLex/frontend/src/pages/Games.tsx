@@ -1,12 +1,6 @@
-import React, {useEffect, useRef, useState} from 'react';
 import CustomNavbar from "../components/NavBar";
 import Container from '@mui/material/Container';
-import {useSelector, useDispatch} from "react-redux";
-import {FrontLexStore} from "../models/store";
-import {getGames} from "../store/videogames/operations";
-import {createGame} from "../store/videogames/actions";
 import VideoGameList from "../container/VideoGameList";
-import VideoGameForm from "../components/VideoGameForm";
 import VideoGameFormContainer from "../container/VideoGameFormContainer";
 
 
@@ -16,7 +10,7 @@ const Games = () => {
         <>
             <CustomNavbar/>
             <Container className="pt-5">
-                <h4 className='my-3'>Current selection: </h4>
+                <h4 className='my-3'><center>Current Game: </center></h4>
                 <VideoGameFormContainer/>
                 <VideoGameList/>
             </Container>

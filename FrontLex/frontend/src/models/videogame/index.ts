@@ -1,5 +1,15 @@
 import {IconButtonProps} from "@mui/material/IconButton"
 
+export interface ErrorMessages {
+    name?: string,
+    message?: string
+}
+
+export interface UserLogin {
+    username?: string,
+    password?: string
+}
+
 interface Game {
     gameID: number | null,
     gameName: string,
@@ -24,6 +34,10 @@ export interface GameFormProps extends Game {
     updateCallback: (game: Game) => void
 
     createCallback: (game: Game) => void
+}
+
+export interface LoginProps {
+    setUserLoginCallback : (data: UserLogin) => void
 }
 
 export interface VideoGameCardProps extends IconButtonProps, GameTableRowProps {
