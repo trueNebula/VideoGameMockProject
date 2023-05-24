@@ -4,7 +4,7 @@ import {Provider} from "react-redux"
 import store from "./Store";
 import Games from "./pages/Games";
 import Login from "./pages/Login"
-import {BrowserRouter, Route, Router, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Wishlist from "./pages/Wishlist";
 import {UserLogin} from "./models/videogame";
 
@@ -19,17 +19,6 @@ function App() {
         setUserLogin(u);
     }
 
-    const database: Array<UserLogin> = [
-        {
-            username: "user1",
-            password: "pass1"
-        },
-        {
-            username: "user2",
-            password: "pass2"
-        }
-    ];
-
 
     console.log(userLogin)
     return (
@@ -38,8 +27,8 @@ function App() {
                 {JSON.stringify(userLogin) !== JSON.stringify({username:'', password:''}) ?
                     <BrowserRouter>
                         <Routes>
-                            <Route path="/" element={<Games/>}/>
-                            <Route path="/wishlist" element={<Wishlist/>}/>
+                            <Route path="/" element={<Games username={userLogin.username} password={userLogin.password}/>}/>
+                            <Route path="/wishlist" element={<Wishlist username={userLogin.username} password={userLogin.password}/>}/>
                         </Routes>
                     </BrowserRouter> :
                     <Login setUserLoginCallback={(userData) => handleUserLogin(userData)}></Login>}

@@ -15,7 +15,6 @@ const deleteWishlistGame = (data: number|null) => {
     };
 };
 
-//TODO: add this later
 const updateWishlistGame = (data: Game) => {
     return {
         type: UPDATE_GAME_WISHLIST,

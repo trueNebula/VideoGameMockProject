@@ -18,14 +18,13 @@ const VideoGameFormContainer: React.FC = (): React.ReactElement => {
     } = useSelector((state: FrontLexStore) => state);
 
     const handleUpdate = (g: Game) => {
-        if(g.isWishlist) {
+        if (g.isWishlist) {
             dispatch(updateGame(g))
             dispatch(updateWishlistGame(g))
-        }
-        else dispatch(updateGame(g))
+        } else dispatch(updateGame(g))
     }
 
-    const handleCreate = (g:Game) => {
+    const handleCreate = (g: Game) => {
         dispatch(createGame(g))
     }
 
@@ -41,9 +40,11 @@ const VideoGameFormContainer: React.FC = (): React.ReactElement => {
             imageLink={game.imageLink}
             description={game.description}
             isWishlist={game.isWishlist}
-            createCallback={(game) => {handleCreate(game)
+            createCallback={(game) => {
+                handleCreate(game)
             }}
-            updateCallback={(game) => {handleUpdate(game)
+            updateCallback={(game) => {
+                handleUpdate(game)
             }}
         />
     )

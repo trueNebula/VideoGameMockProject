@@ -3,8 +3,11 @@ import Container from '@mui/material/Container';
 import {AppBar, Toolbar} from "@mui/material";
 import {NavLink} from "react-router-dom";
 import Typography from "@mui/material/Typography";
+import {UserLogin} from "../../models/videogame";
+import {AccountCircle} from "@mui/icons-material";
+import Grid from "@mui/material/Grid";
 
-const CustomNavbar: React.FC = (): React.ReactElement => {
+const CustomNavbar: React.FC<UserLogin> = ({username, password} : UserLogin) : React.ReactElement => {
     return (
 
         <AppBar position={"static"} style={{ background: '#2E3B55' }}>
@@ -17,10 +20,9 @@ const CustomNavbar: React.FC = (): React.ReactElement => {
                     href="/"
                     sx={{
                         mr: 2,
-                        display: { xs: 'none', md: 'flex' },
-                        fontFamily: 'Raleway',
+                        display: {xs: 'none', md: 'flex'},
                         fontWeight: 700,
-                        letterSpacing: '.3rem',
+                        letterSpacing: '.1rem',
                         color: 'black',
                         textDecoration: 'none',
                     }}>VIDEO GAMES LIST</Typography>
@@ -38,6 +40,7 @@ const CustomNavbar: React.FC = (): React.ReactElement => {
                                 color: isActive ? "lightcoral" : "white",
                             };
                         }} to="/wishlist">Wishlist</NavLink>
+                <Grid container justifyContent={"flex-end"}><AccountCircle/>user: {username}</Grid>
             </Container>
             </Toolbar>
         </AppBar>

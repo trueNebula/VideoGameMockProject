@@ -13,7 +13,6 @@ const wishlistReducer = (state: WishListState = initialState, action: any): Wish
 
         switch (type) {
             case ADD_GAME_WISHLIST:
-                //TODO: check unique
                 state.num += 1;
                 return {
                     ...state,

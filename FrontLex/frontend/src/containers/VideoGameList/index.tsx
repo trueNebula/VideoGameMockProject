@@ -27,13 +27,11 @@ const VideoGameList: React.FC = (): React.ReactElement => {
     }, [])
 
     const handleDeleteGame = (id: number) => {
-        console.log("HANDLE DELETE GAME FROM LIST", id)
         dispatch(deleteGame(id));
         dispatch(deleteWishlistGame(id));
     }
 
     const handleWishlistUpdate = (g: Game) => {
-        console.log("HANDLE WISHLIST", g)
         dispatch(updateGame(g))
         g.isWishlist ? dispatch(addWishlistGame(g)) : dispatch(deleteWishlistGame(g.gameID))
     }
