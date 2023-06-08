@@ -24,12 +24,12 @@ export interface DestinationRowProps extends Destination {
     onClickCallback: (placeholder: Destination) => void,
     deleteDestinationCallback: (id: number) => void,
     isFiltered?: boolean,
-    noDelete?: boolean
+    noDelete?: boolean,
+    permissions: string | undefined
 }
 
 export interface DestinationFormProps extends Destination {
     updateCallback: (destination: Destination) => void
-
     createCallback: (destination: Destination) => void
 }
 

@@ -8,8 +8,9 @@ import { setDestination } from "../../store/destinationform/actions";
 import DestinationCard from "../../components/DestinationCard";
 import { addWishlistDestination, deleteWishlistDestination } from "../../store/wishlist/actions";
 import { getDestinations } from "../../store/destinations/operations";
+import {UserLogin} from "../../models/destination";
 
-const DestinationList: React.FC = (): React.ReactElement => {
+const DestinationList: React.FC<UserLogin> = ({permissions} : UserLogin): React.ReactElement => {
     const {
         destinations: {destinations},
         destinationState: {destination},
@@ -52,6 +53,7 @@ const DestinationList: React.FC = (): React.ReactElement => {
                         }, index) => (
                 <Grid item xs={2} sm={4} md={4} key={index}>
                     <DestinationCard key={index}
+                                   permissions={permissions}
                                    geolocation={geolocation}
                                    destinationName={destinationName}
                                    destinationID={destinationID}

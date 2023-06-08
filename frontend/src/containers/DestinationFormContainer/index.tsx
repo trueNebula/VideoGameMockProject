@@ -6,8 +6,9 @@ import Destinations from "../../pages/Destinations";
 import { createDestination, updateDestination } from "../../store/destinations/actions";
 import DestinationForm from "../../components/DestinationForm";
 import {updateWishlistDestination} from "../../store/wishlist/actions";
+import {UserLogin} from "../../models/destination";
 
-const DestinationFormContainer: React.FC = (): React.ReactElement => {
+const DestinationFormContainer: React.FC<UserLogin> = (permissions : UserLogin): React.ReactElement => {
     const dispatch = useDispatch();
     const {
         destinationState: {destination},

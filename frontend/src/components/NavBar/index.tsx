@@ -7,7 +7,7 @@ import { UserLogin } from "../../models/destination";
 import { AccountCircle } from "@mui/icons-material";
 import Grid from "@mui/material/Grid";
 
-const CustomNavbar: React.FC<UserLogin> = ({username} : UserLogin) : React.ReactElement => {
+const CustomNavbar: React.FC<UserLogin> = ({username, permissions} : UserLogin) : React.ReactElement => {
     return (
         <AppBar position={"static"} style={{ background: '#2E3B55', paddingBottom: 10, paddingTop:10 }}>
             <Toolbar>
@@ -41,13 +41,15 @@ const CustomNavbar: React.FC<UserLogin> = ({username} : UserLogin) : React.React
                                         color: isActive ? "lightcoral" : "white",
                                     };
                                 }} to="/">Vacation Destinations</NavLink>
+
+                                {permissions !== "admin" &&
                                 <NavLink style={({ isActive }) => {
                                     return {
                                         margin: "7px",
                                         textDecoration: "none",
                                         color: isActive ? "lightcoral" : "white",
                                     };
-                                }} to="/wishlist">Wishlist</NavLink>
+                                }} to="/wishlist">Wishlist</NavLink>}
                             </Grid>
                         </Grid>
 

@@ -6,6 +6,7 @@ import {UserLogin} from "../models/destination";
 import React from "react";
 
 
+
 const Destinations: React.FC<UserLogin> = ({username, password, permissions}: UserLogin): React.ReactElement => {
 
     return (
@@ -23,6 +24,7 @@ const Destinations: React.FC<UserLogin> = ({username, password, permissions}: Us
                     <center>Available Destinations:</center>
                 </h4>
                 <DestinationList/>
+
             </Container>
 
         </>

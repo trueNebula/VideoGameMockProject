@@ -20,7 +20,8 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
                                                          onClickCallback,
                                                          wishlistCallback,
                                                          deleteDestinationCallback,
-                                                         isWishlist
+                                                         isWishlist,
+                                                         permissions
                                                      }: DestinationCardProps): React.ReactElement => {
 
 
@@ -78,9 +79,10 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
+                {permissions !== "admin" &&
                 <IconButton aria-label="add to favorites" onClick={handleWishlistCallback}>
                     <FavoriteIcon style={isWishlist ? {fill: "red"} : {fill: "grey"}}/>
-                </IconButton>
+                </IconButton>}
                 <IconButton aria-label="delete" onClick={handleDeleteGameCallback}>
                     <DeleteIcon/>
                 </IconButton>
