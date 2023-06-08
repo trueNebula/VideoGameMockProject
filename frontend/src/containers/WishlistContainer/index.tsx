@@ -5,8 +5,9 @@ import Grid from '@mui/material/Grid';
 import DestinationCard from "../../components/DestinationCard";
 import { addWishlistDestination, deleteWishlistDestination } from "../../store/wishlist/actions";
 import { updateDestination } from "../../store/destinations/actions";
+import {UserLogin} from "../../models/destination";
 
-const WishlistContainer: React.FC = (): React.ReactElement => {
+const WishlistContainer: React.FC<UserLogin> = ({permissions}: UserLogin): React.ReactElement => {
     const {
         destinations: {destinations},
         destinationState: {destination},
@@ -40,6 +41,7 @@ const WishlistContainer: React.FC = (): React.ReactElement => {
                            }, index) => (
                 <Grid item xs={2} sm={4} md={4} key={index}>
                     <DestinationCard key={index}
+                                   permissions={permissions}
                                    destinationName={destinationName}
                                    destinationID={destinationID}
                                    geolocation={geolocation}
