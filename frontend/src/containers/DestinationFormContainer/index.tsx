@@ -8,7 +8,7 @@ import DestinationForm from "../../components/DestinationForm";
 import {updateWishlistDestination} from "../../store/wishlist/actions";
 import {UserLogin} from "../../models/destination";
 
-const DestinationFormContainer: React.FC<UserLogin> = (permissions : UserLogin): React.ReactElement => {
+const DestinationFormContainer: React.FC<UserLogin> = ({permissions} : UserLogin): React.ReactElement => {
     const dispatch = useDispatch();
     const {
         destinationState: {destination},
@@ -42,6 +42,7 @@ const DestinationFormContainer: React.FC<UserLogin> = (permissions : UserLogin):
                 handleUpdate(destination)
             }}
         />
+
     )
 }
 
