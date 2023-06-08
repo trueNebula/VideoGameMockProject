@@ -6,16 +6,16 @@ import {UserLogin} from "../models/destination";
 import React from "react";
 
 
-const Destinations: React.FC<UserLogin> = ({username, password} : UserLogin) : React.ReactElement => {
+const Destinations: React.FC<UserLogin> = ({username, permissions} : UserLogin) : React.ReactElement => {
 
     return (
         <>
-            <CustomNavbar username={username} password={password}/>
+            <CustomNavbar username={username} permissions={permissions}/>
             <Container className="pt-5">
                 <h4 className='my-3'><center>Current Destination: </center></h4>
-                <DestinationFormContainer/>
+                <DestinationFormContainer permissions={permissions}/>
                 <h4 className='my-4'><center>Available Destinations: </center></h4>
-                <DestinationList/>
+                <DestinationList permissions={permissions}/>
             </Container>
 
         </>
