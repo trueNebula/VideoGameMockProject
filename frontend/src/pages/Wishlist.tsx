@@ -5,13 +5,13 @@ import WishlistContainer from "../containers/WishlistContainer";
 import {UserLogin} from "../models/destination";
 
 
-const Wishlist: React.FC<UserLogin> = ({username, password} : UserLogin) : React.ReactElement => {
+const Wishlist: React.FC<UserLogin> = ({username, password, permissions} : UserLogin) : React.ReactElement => {
 
     return (
         <>
             <CustomNavbar username={username} password={password}/>
             <Container className="pt-5">
-                <WishlistContainer />
+                <WishlistContainer permissions={permissions}/>
             </Container>
 
         </>

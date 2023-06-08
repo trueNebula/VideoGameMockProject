@@ -50,6 +50,14 @@ const CustomNavbar: React.FC<UserLogin> = ({username, permissions} : UserLogin) 
                                         color: isActive ? "lightcoral" : "white",
                                     };
                                 }} to="/wishlist">Wishlist</NavLink>}
+                                {permissions !== "admin" &&
+                                    <NavLink style={({ isActive }) => {
+                                        return {
+                                            margin: "7px",
+                                            textDecoration: "none",
+                                            color: isActive ? "lightcoral" : "white",
+                                        };
+                                    }} to="/private">Private List</NavLink>}
                             </Grid>
                         </Grid>
 
