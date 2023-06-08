@@ -14,14 +14,14 @@ const Destinations: React.FC<UserLogin> = ({username, password, permissions}: Us
             <CustomNavbar username={username} password={password} permissions={permissions}/>
             <Container className="pt-5">
                 {// conditionally render form for admin on public list
-                }
+                    }
                 {permissions === "admin" ? <>
                     <h4 className='my-3'>
                         <center>Current Destination:</center>
                     </h4>
                     <DestinationFormContainer permissions={permissions}/></> : <></>}
                 {// render bucket list regardless
-                }
+                    }
                 <h4 className='my-4'>
                     <center>Available Destinations:</center>
                 </h4>

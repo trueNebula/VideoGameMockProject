@@ -9,9 +9,7 @@ import {updateWishlistDestination} from "../../store/wishlist/actions";
 import {UserLogin} from "../../models/destination";
 import {createDestinationPrivate, updateDestinationPrivate} from "../../store/privatelist/actions";
 
-
 const DestinationFormContainer: React.FC<UserLogin> = ({permissions}: UserLogin): React.ReactElement => {
-
     const dispatch = useDispatch();
     const {
         destinationState: {destination},

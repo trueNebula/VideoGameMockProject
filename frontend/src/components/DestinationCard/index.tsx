@@ -9,20 +9,20 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import {DestinationCardProps} from "../../models/destination";
+import { DestinationCardProps } from "../../models/destination";
 
 const DestinationCard: React.FC<DestinationCardProps> = ({
-                                                             destinationID,
-                                                             destinationName,
-                                                             geolocation,
-                                                             description,
-                                                             imageLink,
-                                                             onClickCallback,
-                                                             wishlistCallback,
-                                                             deleteDestinationCallback,
-                                                             isWishlist,
-                                                             permissions
-                                                         }: DestinationCardProps): React.ReactElement => {
+                                                         destinationID,
+                                                         destinationName,
+                                                         geolocation,
+                                                         description,
+                                                         imageLink,
+                                                         onClickCallback,
+                                                         wishlistCallback,
+                                                         deleteDestinationCallback,
+                                                         isWishlist,
+                                                         permissions
+                                                     }: DestinationCardProps): React.ReactElement => {
 
 
     let randomColor = require('randomcolor');
@@ -79,13 +79,11 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                {
-                    <IconButton disabled={permissions !== "user"} aria-label="add to favorites"
-                                onClick={handleWishlistCallback}>
-                        <FavoriteIcon style={isWishlist ? {fill: "red"} : {fill: "grey"}}/>
-                    </IconButton>}
-
-                <IconButton disabled={permissions !== "admin"}  aria-label="delete" onClick={handleDeleteGameCallback}>
+                {permissions !== "admin" &&
+                <IconButton aria-label="add to favorites" onClick={handleWishlistCallback}>
+                    <FavoriteIcon style={isWishlist ? {fill: "red"} : {fill: "grey"}}/>
+                </IconButton>}
+                <IconButton aria-label="delete" onClick={handleDeleteGameCallback}>
                     <DeleteIcon/>
                 </IconButton>
             </CardActions>
