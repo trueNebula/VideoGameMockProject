@@ -7,7 +7,8 @@ export interface ErrorMessages {
 
 export interface UserLogin {
     username?: string,
-    password?: string
+    password?: string,
+    permissions?: string
 }
 
 interface Destination {

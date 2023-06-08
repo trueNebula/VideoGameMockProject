@@ -10,21 +10,24 @@ const Login: React.FC<LoginProps> = ({setUserLoginCallback}) => {
     const [errorMessages, setErrorMessages] = useState<ErrorMessages>({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const form = useRef(null)
-    const [selection, setSelection] = useState<UserLogin>({username: "", password: ""});
+    const [selection, setSelection] = useState<UserLogin>({username: "", password: "", permissions: ""});
 
     // User Login info
     const database = [
         {
             username: "admin",
-            password: "admin"
+            password: "admin",
+            permissions: "admin"
         },
         {
             username: "user1",
-            password: "pass1"
+            password: "pass1",
+            permissions: "user"
         },
         {
             username: "user2",
-            password: "pass2"
+            password: "pass2",
+            permissions: "user"
         }
     ];
 
@@ -47,6 +50,11 @@ const Login: React.FC<LoginProps> = ({setUserLoginCallback}) => {
                 setErrorMessages({name: "pass", message: errors.pass});
             } else {
                 setIsSubmitted(true);
+                for (const i of database) {
+                    if (i.username === userData.username) {
+                        userData.permissions = i.permissions;
+                    }
+                }
                 console.log("Authentication successful!")
                 setUserLoginCallback(userData);
             }
@@ -64,20 +72,20 @@ const Login: React.FC<LoginProps> = ({setUserLoginCallback}) => {
 
     // JSX code for login form
     return (
-        <FormControl className='my-3' ref={form}  sx={{
+        <FormControl className='my-3' ref={form} sx={{
             'display': 'flex',
             'flex-direction': 'column',
             'padding': '5px',
-            'alignItems':'center',
+            'alignItems': 'center',
             'justifyContent': 'center',
-            'justify':'center',
+            'justify': 'center',
             'minHeight': "100vh",
-            'maxHeight':'fit-content'
+            'maxHeight': 'fit-content'
         }}>
             <h4 className='my-3'>
                 <center>Sign In</center>
             </h4>
-            <Container component="main" maxWidth="xs"  sx={{
+            <Container component="main" maxWidth="xs" sx={{
                 'display': 'flex',
                 'flex-direction': 'column',
             }}>

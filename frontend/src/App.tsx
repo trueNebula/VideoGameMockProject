@@ -11,12 +11,13 @@ import {UserLogin} from "./models/destination";
 
 function App() {
 
-    const LoginContext = createContext<UserLogin>({username: "", password:""});
+    const LoginContext = createContext<UserLogin>({username: "", password:"", permissions:""});
     const LoginMode = useContext(LoginContext);
     const [userLogin, setUserLogin] = useState(LoginMode)
 
     const handleUserLogin = (u : UserLogin) => {
         setUserLogin(u);
+        console.log(u);
     }
 
 
@@ -24,11 +25,11 @@ function App() {
     return (
         <Provider store={store}>
             <LoginContext.Provider value={userLogin}>
-                {JSON.stringify(userLogin) !== JSON.stringify({username:'', password:''}) ?
+                {JSON.stringify(userLogin) !== JSON.stringify({username:'', password:'', permissions:''}) ?
                     <BrowserRouter>
                         <Routes>
-                            <Route path="/" element={<Destinations username={userLogin.username} password={userLogin.password}/>}/>
-                            <Route path="/wishlist" element={<Wishlist username={userLogin.username} password={userLogin.password}/>}/>
+                            <Route path="/" element={<Destinations username={userLogin.username} password={userLogin.password} permissions={userLogin.permissions}/>}/>
+                            <Route path="/wishlist" element={<Wishlist username={userLogin.username} password={userLogin.password} permissions={userLogin.permissions}/>}/>
                         </Routes>
                     </BrowserRouter> :
                     <Login setUserLoginCallback={(userData) => handleUserLogin(userData)}></Login>}
