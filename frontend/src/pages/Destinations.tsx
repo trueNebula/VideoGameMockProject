@@ -6,16 +6,25 @@ import {UserLogin} from "../models/destination";
 import React from "react";
 
 
-const Destinations: React.FC<UserLogin> = ({username, permissions} : UserLogin) : React.ReactElement => {
+
+const Destinations: React.FC<UserLogin> = ({username, password, permissions}: UserLogin): React.ReactElement => {
 
     return (
         <>
-            <CustomNavbar username={username} permissions={permissions}/>
+            <CustomNavbar username={username} password={password} permissions={permissions}/>
             <Container className="pt-5">
-                <h4 className='my-3'><center>Current Destination: </center></h4>
-                <DestinationFormContainer permissions={permissions}/>
-                <h4 className='my-4'><center>Available Destinations: </center></h4>
-                <DestinationList permissions={permissions}/>
+                // conditionally render form for admin on public list
+                {permissions === "admin" ? <>
+                    <h4 className='my-3'>
+                        <center>Current Destination:</center>
+                    </h4>
+                    <DestinationFormContainer/></> : <></>}
+                // render bucket list regardless
+                <h4 className='my-4'>
+                    <center>Available Destinations:</center>
+                </h4>
+                <DestinationList/>
+
             </Container>
 
         </>
