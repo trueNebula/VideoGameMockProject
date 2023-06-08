@@ -4,6 +4,12 @@ export interface DestinationsState {
 
 }
 
+export interface PrivateDestinationsState {
+    privateDestinations: Destination[]
+    num: number
+
+}
+
 export interface WishListState {
     wishlist: Destination[]
     num: number
@@ -25,6 +31,7 @@ export interface Destination {
 
 export interface FrontLexStore {
     destinations: DestinationsState
+    privateDestinations: PrivateDestinationsState
     destinationState: DestinationState
     wishlistState: WishListState
 }

@@ -1,13 +1,13 @@
 import {CREATE_DESTINATION_PRIVATE, DELETE_DESTINATION_PRIVATE, UPDATE_DESTINATION_PRIVATE} from "./types";
-import {Destination, DestinationsState} from "../../models/store";
+import {Destination, PrivateDestinationsState} from "../../models/store";
 
 
 const initialState = {
-    destinations: [],
+    privateDestinations: [],
     num: 0
 };
 
-const privateDestinationReducer = (state: DestinationsState = initialState, action: any): DestinationsState => {
+const privateDestinationReducer = (state: PrivateDestinationsState = initialState, action: any): PrivateDestinationsState => {
         const {type, payload} = action;
         console.log("PRIVATE", action) //debug
 
@@ -16,20 +16,20 @@ const privateDestinationReducer = (state: DestinationsState = initialState, acti
                 state.num += 1;
                 return {
                     ...state,
-                    destinations: [...state.destinations, action.payload],
+                    privateDestinations: [...state.privateDestinations, action.payload],
                 }
             case DELETE_DESTINATION_PRIVATE:
                 state.num -= 1;
                 return {
                     ...state,
-                    destinations: [...state.destinations.filter(destination => destination.destinationID !== action.payload)]
+                    privateDestinations: [...state.privateDestinations.filter(destination => destination.destinationID !== action.payload)]
                 };
 
             case UPDATE_DESTINATION_PRIVATE:
                 return {
                     ...state,
-                    destinations: [
-                        ...state.destinations.map(destination => {
+                    privateDestinations: [
+                        ...state.privateDestinations.map(destination => {
                                 if (destination.destinationID === action.payload.destinationID) {
                                     destination.destinationName = action.payload.destinationName;
                                     destination.geolocation = action.payload.geolocation
