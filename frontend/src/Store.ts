@@ -7,10 +7,11 @@ import thunk from 'redux-thunk';
 import {composeWithDevTools} from "redux-devtools-extension";
 import wishlistState from "./store/wishlist/reducer";
 import privateDestinations from "./store/privatelist/reducer";
+import destinationStatePrivate from "./store/destinationform2/reducer"
 
 const store: Store<CombinedState<FrontLexStore>> = createStore(
     combineReducers({
-        destinations, privateDestinations, destinationState, wishlistState
+        destinations, privateDestinations, destinationState, wishlistState, destinationStatePrivate
     } ),
     composeWithDevTools(applyMiddleware(thunk)));
 

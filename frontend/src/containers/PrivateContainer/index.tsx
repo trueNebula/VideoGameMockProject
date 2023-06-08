@@ -19,6 +19,7 @@ const PrivateContainer: React.FC<UserLogin> = ({permissions}: UserLogin): React.
     const dispatch = useDispatch();
 
     const handleDeleteDestination = (id: number) => {
+        console.log("hi?")
         if (permissions === "user") {
             dispatch(deleteDestinationPrivate(id));
             dispatch(deleteWishlistDestination(id));
@@ -33,7 +34,7 @@ const PrivateContainer: React.FC<UserLogin> = ({permissions}: UserLogin): React.
 
     return (
         <Grid container spacing={{xs: 2, md: 3}} columns={{xs: 4, sm: 8, md: 12}}>
-            {wishlist.map(({
+            {privateDestinations.map(({
                                destinationID,
                                destinationName,
                                geolocation,

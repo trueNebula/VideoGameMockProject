@@ -19,7 +19,7 @@ const Destinations: React.FC<UserLogin> = ({username, password, permissions}: Us
                     <h4 className='my-3'>
                         <center>Current Destination:</center>
                     </h4>
-                    <DestinationFormContainer/></> : <></>}
+                    <DestinationFormContainer permissions={permissions}/></> : <></>}
                 {// render bucket list regardless
                     }
                 <h4 className='my-4'>

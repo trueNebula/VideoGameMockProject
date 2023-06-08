@@ -16,7 +16,7 @@ const PrivateDestinations: React.FC<UserLogin> = ({username, password, permissio
                 <h4 className='my-3'>
                     <center>Current Destination:</center>
                 </h4>
-                <DestinationFormContainer/>
+                <DestinationFormContainer permissions={permissions}/>
                 <h4 className='my-4'>
                     <center>Available Destinations:</center>
                 </h4>

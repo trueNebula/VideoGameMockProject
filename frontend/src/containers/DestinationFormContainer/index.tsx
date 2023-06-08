@@ -29,10 +29,18 @@ const DestinationFormContainer: React.FC<UserLogin> = ({permissions}: UserLogin)
     }
 
     const handleCreate = (g: Destination) => {
-        permissions === "user" ? dispatch(createDestinationPrivate(g)) : dispatch(createDestination(g))
+        console.log(permissions)
+        if(permissions === "user") {
+            console.log("AAAA")
+            dispatch(createDestinationPrivate(g))
+        }
+        else {
+            dispatch(createDestination(g))
+        }
     }
 
     return (
+        //TODO: RANDARE CONDITIONALA BAZATA PE STORE
         <DestinationForm
             destinationID={destination.destinationID}
             destinationName={destination.destinationName}

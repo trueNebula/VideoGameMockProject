@@ -19,7 +19,10 @@ export interface DestinationState {
     destination: Destination
 
 }
+export interface DestinationStatePrivate {
+    destination2: Destination
 
+}
 export interface Destination {
     destinationID: number | null,
     destinationName: string,

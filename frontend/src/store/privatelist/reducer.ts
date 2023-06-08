@@ -13,6 +13,8 @@ const privateDestinationReducer = (state: PrivateDestinationsState = initialStat
 
         switch (type) {
             case CREATE_DESTINATION_PRIVATE:
+                action.payload.destinationID = Math.floor(Math.random() * 1000);
+
                 state.num += 1;
                 return {
                     ...state,
