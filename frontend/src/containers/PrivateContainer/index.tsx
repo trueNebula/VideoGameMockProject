@@ -7,6 +7,8 @@ import {UserLogin} from "../../models/destination";
 import {addWishlistDestination, deleteWishlistDestination} from "../../store/wishlist/actions";
 import {deleteDestinationPrivate, updateDestinationPrivate} from "../../store/privatelist/actions";
 import {updateDestination} from "../../store/destinations/actions";
+import {setDestination} from "../../store/destinationform/actions";
+import {setDestinationPrivate} from "../../store/destinationform2/actions";
 
 const PrivateContainer: React.FC<UserLogin> = ({permissions}: UserLogin): React.ReactElement => {
     const {
@@ -17,6 +19,11 @@ const PrivateContainer: React.FC<UserLogin> = ({permissions}: UserLogin): React.
     } = useSelector((state: FrontLexStore) => state);
 
     const dispatch = useDispatch();
+
+    const handleOnClick = (g: Destination) => {
+        console.log(g.destinationID)
+        dispatch(setDestinationPrivate(g))
+    }
 
     const handleDeleteDestination = (id: number) => {
         console.log("hi?")
@@ -48,7 +55,21 @@ const PrivateContainer: React.FC<UserLogin> = ({permissions}: UserLogin): React.
                                      destinationName={destinationName}
                                      destinationID={destinationID}
                                      geolocation={geolocation}
-                                     onClickCallback={() => null}
+                                     onClickCallback={({
+                                                           destinationID,
+                                                           destinationName,
+                                                           geolocation,
+                                                           description,
+                                                           imageLink,
+                                                           isWishlist
+                                                       }) => handleOnClick({
+                                         destinationID: destinationID,
+                                         destinationName: destinationName,
+                                         geolocation,
+                                         imageLink,
+                                         description,
+                                         isWishlist
+                                     })}
                                      deleteDestinationCallback={(gameID) => handleDeleteDestination(gameID)}
                                      wishlistCallback={({
                                                             destinationID,

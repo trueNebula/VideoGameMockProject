@@ -15,7 +15,8 @@ const DestinationFormContainer: React.FC<UserLogin> = ({permissions}: UserLogin)
         destinationState: {destination},
         destinations: {destinations},
         wishlistState: {wishlist},
-        privateDestinations: {privateDestinations}
+        privateDestinations: {privateDestinations},
+        destinationStatePrivate: {destination2}
     } = useSelector((state: FrontLexStore) => state);
 
     const handleUpdate = (g: Destination) => {
@@ -41,7 +42,8 @@ const DestinationFormContainer: React.FC<UserLogin> = ({permissions}: UserLogin)
 
     return (
         //TODO: RANDARE CONDITIONALA BAZATA PE STORE
-        <DestinationForm
+
+        permissions === "admin" ? <DestinationForm
             destinationID={destination.destinationID}
             destinationName={destination.destinationName}
             geolocation={destination.geolocation}
@@ -54,7 +56,21 @@ const DestinationFormContainer: React.FC<UserLogin> = ({permissions}: UserLogin)
             updateCallback={(destination) => {
                 handleUpdate(destination)
             }}
+        /> : <DestinationForm
+            destinationID={destination2.destinationID}
+            destinationName={destination2.destinationName}
+            geolocation={destination2.geolocation}
+            imageLink={destination2.imageLink}
+            description={destination2.description}
+            isWishlist={destination2.isWishlist}
+            createCallback={(destination) => {
+                handleCreate(destination)
+            }}
+            updateCallback={(destination) => {
+                handleUpdate(destination)
+            }}
         />
+
     )
 }
 

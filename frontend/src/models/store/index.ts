@@ -37,4 +37,5 @@ export interface FrontLexStore {
     privateDestinations: PrivateDestinationsState
     destinationState: DestinationState
     wishlistState: WishListState
+    destinationStatePrivate: DestinationStatePrivate
 }
