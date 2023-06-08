@@ -1,5 +1,5 @@
-import {ADD_GAME_WISHLIST, UPDATE_GAME_WISHLIST, DELETE_GAME_WISHLIST} from "./types";
-import {Game, VideoGamesState, WishListState} from "../../models/store";
+import {ADD_DESTINATION_WISHLIST, UPDATE_DESTINATION_WISHLIST, DELETE_DESTINATION_WISHLIST} from "./types";
+import {Destination, DestinationsState, WishListState} from "../../models/store";
 
 
 const initialState = {
@@ -12,35 +12,31 @@ const wishlistReducer = (state: WishListState = initialState, action: any): Wish
         console.log("WISHLIST", action)
 
         switch (type) {
-            case ADD_GAME_WISHLIST:
+            case ADD_DESTINATION_WISHLIST:
                 state.num += 1;
                 return {
                     ...state,
                     wishlist: [...state.wishlist, action.payload],
                 }
-            case DELETE_GAME_WISHLIST:
+            case DELETE_DESTINATION_WISHLIST:
                 state.num -= 1;
                 return {
                     ...state,
-                    wishlist: [...state.wishlist.filter(game => game.gameID !== action.payload)]
+                    wishlist: [...state.wishlist.filter(destination => destination.destinationID !== action.payload)]
                 };
 
-            case UPDATE_GAME_WISHLIST:
+            case UPDATE_DESTINATION_WISHLIST:
                 return {
                     ...state,
                     wishlist: [
-                        ...state.wishlist.map(game => {
-                                if (game.gameID === action.payload.gameID) {
-                                    game.gameName = action.payload.gameName;
-                                    game.rating = action.payload.rating
-                                    game.company = action.payload.company
-                                    game.sales = action.payload.sales
-                                    game.releaseYear = action.payload.releaseYear
-                                    game.platform = action.payload.platform
-                                    game.imageLink = action.payload.imageLink
-                                    game.description = action.payload.description
+                        ...state.wishlist.map(destination => {
+                                if (destination.destinationID === action.payload.destinationID) {
+                                    destination.destinationName = action.payload.destinationName;
+                                    destination.geolocation = action.payload.geolocation
+                                    destination.imageLink = action.payload.imageLink
+                                    destination.description = action.payload.description
                                 }
-                                return game;
+                                return destination;
                             }
                         )]
                 };

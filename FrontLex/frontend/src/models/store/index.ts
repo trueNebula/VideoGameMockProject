@@ -1,35 +1,30 @@
-export interface VideoGamesState {
-    games: Game[]
+export interface DestinationsState {
+    destinations: Destination[]
     num: number
 
 }
 
 export interface WishListState {
-    wishlist: Game[]
+    wishlist: Destination[]
     num: number
 }
 
-export interface VideoGameState {
-    game: Game
+export interface DestinationState {
+    destination: Destination
 
 }
 
-export interface Game {
-    gameID: number | null,
-    gameName: string,
-    releaseYear: number | null,
-    company: string,
-    rating: number | null,
-    sales: number | null,
-    platform: string,
+export interface Destination {
+    destinationID: number | null,
+    destinationName: string,
+    geolocation: string,
     imageLink: string,
     description: string
     isWishlist: boolean
 }
 
 export interface FrontLexStore {
-    videoGames: VideoGamesState
-    gameState: VideoGameState
+    destinations: DestinationsState
+    destinationState: DestinationState
     wishlistState: WishListState
 }
-

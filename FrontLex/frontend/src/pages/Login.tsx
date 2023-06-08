@@ -1,6 +1,6 @@
 import React, {useRef, useState} from "react";
-import {ErrorMessages, LoginProps, UserLogin} from "../models/videogame";
-import {FormControl, TextField} from "@mui/material";
+import {ErrorMessages, LoginProps, UserLogin} from "../models/destination";
+import {Box, FormControl, TextField} from "@mui/material";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 
@@ -14,6 +14,10 @@ const Login: React.FC<LoginProps> = ({setUserLoginCallback}) => {
 
     // User Login info
     const database = [
+        {
+            username: "admin",
+            password: "admin"
+        },
         {
             username: "user1",
             password: "pass1"
@@ -67,9 +71,8 @@ const Login: React.FC<LoginProps> = ({setUserLoginCallback}) => {
             'alignItems':'center',
             'justifyContent': 'center',
             'justify':'center',
-            'maxwidth':'200px',
-            'maxheight':'fit-content'
-
+            'minHeight': "100vh",
+            'maxHeight':'fit-content'
         }}>
             <h4 className='my-3'>
                 <center>Sign In</center>
@@ -95,7 +98,6 @@ const Login: React.FC<LoginProps> = ({setUserLoginCallback}) => {
                         onClick={handleSubmit}>Login</Button>
             </Container>
         </FormControl>
-
     );
 
 }

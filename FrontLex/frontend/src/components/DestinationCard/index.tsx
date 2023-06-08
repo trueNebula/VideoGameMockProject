@@ -9,43 +9,34 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import {VideoGameCardProps} from "../../models/videogame";
-import {Rating} from "@mui/material";
+import { DestinationCardProps } from "../../models/destination";
 
-const VideoGameCard: React.FC<VideoGameCardProps> = ({
-                                                         gameID,
-                                                         gameName,
-                                                         releaseYear,
-                                                         company,
-                                                         rating,
-                                                         sales,
-                                                         platform,
+const DestinationCard: React.FC<DestinationCardProps> = ({
+                                                         destinationID,
+                                                         destinationName,
+                                                         geolocation,
+                                                         description,
+                                                         imageLink,
                                                          onClickCallback,
                                                          wishlistCallback,
-                                                         deleteGameCallback,
-                                                         imageLink,
-                                                         description,
+                                                         deleteDestinationCallback,
                                                          isWishlist
-                                                     }: VideoGameCardProps): React.ReactElement => {
+                                                     }: DestinationCardProps): React.ReactElement => {
 
 
     let randomColor = require('randomcolor');
 
     const handleDeleteGameCallback = () => {
-        gameID && deleteGameCallback(gameID);
+        destinationID && deleteDestinationCallback(destinationID);
     }
 
     const handleWishlistCallback = () => {
         isWishlist = !isWishlist;
 
         wishlistCallback({
-            gameID,
-            gameName,
-            releaseYear,
-            company,
-            rating,
-            sales,
-            platform,
+            destinationID,
+            destinationName,
+            geolocation,
             imageLink,
             description,
             isWishlist
@@ -54,13 +45,9 @@ const VideoGameCard: React.FC<VideoGameCardProps> = ({
     const handleClickCallback = (e: any) => {
         e.preventDefault()
         onClickCallback({
-            gameID: gameID,
-            gameName: gameName,
-            releaseYear,
-            company,
-            rating,
-            sales,
-            platform,
+            destinationID: destinationID,
+            destinationName: destinationName,
+            geolocation,
             imageLink,
             description,
             isWishlist
@@ -71,20 +58,19 @@ const VideoGameCard: React.FC<VideoGameCardProps> = ({
         <Card sx={{maxWidth: 345}} onClick={handleClickCallback}>
             <CardHeader
                 avatar={
-                    <Avatar sx={{bgcolor: randomColor({seed: gameName})}} aria-label="game">
-                        {gameName.charAt(0)}
+                    <Avatar sx={{bgcolor: randomColor({seed: destinationName + "theGameLmao"})}} aria-label="game">
+                        {destinationName.charAt(0)}
                     </Avatar>
                 }
-                title={gameName}
+                title={destinationName}
                 style={{whiteSpace: 'pre-line'}}
-                subheader={"released: " + releaseYear + `\ncompany: ` + company + `\n`}
+                subheader={geolocation}
             />
-            <Rating name="read-only" value={rating} style={{margin:'0 0 0 20px'}} readOnly/>
             <CardMedia
                 component="img"
                 height="194"
                 image={imageLink}
-                alt={gameName}
+                alt={destinationName}
             />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
@@ -103,4 +89,4 @@ const VideoGameCard: React.FC<VideoGameCardProps> = ({
     );
 }
 
-export default VideoGameCard;
+export default DestinationCard;

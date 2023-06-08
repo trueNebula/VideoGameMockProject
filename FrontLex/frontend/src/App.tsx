@@ -2,11 +2,11 @@ import React, {createContext, useContext, useState} from 'react';
 import './App.css';
 import {Provider} from "react-redux"
 import store from "./Store";
-import Games from "./pages/Games";
+import Destinations from "./pages/Destinations";
 import Login from "./pages/Login"
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Wishlist from "./pages/Wishlist";
-import {UserLogin} from "./models/videogame";
+import {UserLogin} from "./models/destination";
 
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
                 {JSON.stringify(userLogin) !== JSON.stringify({username:'', password:''}) ?
                     <BrowserRouter>
                         <Routes>
-                            <Route path="/" element={<Games username={userLogin.username} password={userLogin.password}/>}/>
+                            <Route path="/" element={<Destinations username={userLogin.username} password={userLogin.password}/>}/>
                             <Route path="/wishlist" element={<Wishlist username={userLogin.username} password={userLogin.password}/>}/>
                         </Routes>
                     </BrowserRouter> :

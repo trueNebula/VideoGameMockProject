@@ -1,50 +1,66 @@
 import React from 'react';
 import Container from '@mui/material/Container';
-import {AppBar, Toolbar} from "@mui/material";
-import {NavLink} from "react-router-dom";
+import { AppBar, Toolbar } from "@mui/material";
+import { NavLink } from "react-router-dom";
 import Typography from "@mui/material/Typography";
-import {UserLogin} from "../../models/videogame";
-import {AccountCircle} from "@mui/icons-material";
+import { UserLogin } from "../../models/destination";
+import { AccountCircle } from "@mui/icons-material";
 import Grid from "@mui/material/Grid";
 
-const CustomNavbar: React.FC<UserLogin> = ({username, password} : UserLogin) : React.ReactElement => {
+const CustomNavbar: React.FC<UserLogin> = ({username} : UserLogin) : React.ReactElement => {
     return (
-
-        <AppBar position={"static"} style={{ background: '#2E3B55' }}>
+        <AppBar position={"static"} style={{ background: '#2E3B55', paddingBottom: 10, paddingTop:10 }}>
             <Toolbar>
-            <Container >
-                <Typography
-                    variant="h6"
-                    noWrap
-                    component="a"
-                    href="/"
-                    sx={{
-                        mr: 2,
-                        display: {xs: 'none', md: 'flex'},
-                        fontWeight: 700,
-                        letterSpacing: '.1rem',
-                        color: 'black',
-                        textDecoration: 'none',
-                    }}>VIDEO GAMES LIST</Typography>
-                        <NavLink  style={({ isActive, isPending }) => {
-                            return {
-                                margin: "7px",
-                                textDecoration: isActive ? "" : "none",
-                                color: isActive ? "lightcoral" : "white",
-                            };
-                        }} to="/">Video Games</NavLink>
-                        <NavLink style={({ isActive, isPending }) => {
-                            return {
-                                margin: "7px",
-                                textDecoration: isActive ? "" : "none",
-                                color: isActive ? "lightcoral" : "white",
-                            };
-                        }} to="/wishlist">Wishlist</NavLink>
-                <Grid container justifyContent={"flex-end"}><AccountCircle/>user: {username}</Grid>
-            </Container>
+                <Container >
+
+                    <Grid container justifyContent={"space-between"} alignItems={"center"}>
+
+                        <Grid container justifyContent={"space-between"} flexDirection={"column"} xs={5}>
+                            <>
+                                <Typography
+                                    variant="h6"
+                                    noWrap
+                                    component="a"
+                                    href="/"
+                                    sx={{
+                                        mr: 2,
+                                        display: {xs: 'none', md: 'flex'},
+                                        fontWeight: 700,
+                                        letterSpacing: '.1rem',
+                                        color: 'white',
+                                        textDecoration: 'none',
+                                    }}>
+                                    VACATION DESTINATION LIST
+                                </Typography>
+                            </>
+                            <Grid>
+                                <NavLink  style={({ isActive }) => {
+                                    return {
+                                        margin: "7px",
+                                        textDecoration: "none",
+                                        color: isActive ? "lightcoral" : "white",
+                                    };
+                                }} to="/">Vacation Destinations</NavLink>
+                                <NavLink style={({ isActive }) => {
+                                    return {
+                                        margin: "7px",
+                                        textDecoration: "none",
+                                        color: isActive ? "lightcoral" : "white",
+                                    };
+                                }} to="/wishlist">Wishlist</NavLink>
+                            </Grid>
+                        </Grid>
+
+                        <Grid container justifyContent={"space-between"} xs={1.8}>
+                            <AccountCircle/>
+                            Logged in as: {username}
+                        </Grid>
+
+                    </Grid>
+
+                </Container>
             </Toolbar>
         </AppBar>
-
     );
 }
 

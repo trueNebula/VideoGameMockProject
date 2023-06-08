@@ -1,77 +1,61 @@
 import React from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {FrontLexStore, Game} from "../../models/store";
+import { useDispatch, useSelector } from "react-redux";
+import { FrontLexStore, Destination } from "../../models/store";
 import Grid from '@mui/material/Grid';
-import VideoGameCard from "../../components/VideoGameCard";
-import {addWishlistGame, deleteWishlistGame} from "../../store/wishlist/actions";
-import {updateGame} from "../../store/videogames/actions";
+import DestinationCard from "../../components/DestinationCard";
+import { addWishlistDestination, deleteWishlistDestination } from "../../store/wishlist/actions";
+import { updateDestination } from "../../store/destinations/actions";
 
 const WishlistContainer: React.FC = (): React.ReactElement => {
     const {
-        videoGames: {games},
-        gameState: {game},
+        destinations: {destinations},
+        destinationState: {destination},
         wishlistState: {wishlist}
     } = useSelector((state: FrontLexStore) => state);
 
     const dispatch = useDispatch();
 
-    const handleDeleteGame = (id: number) => {
+    const handleDeleteDestination = (id: number) => {
         alert("Cannot delete game in wishlist menu!")
     }
 
-    const handleWishlist = (g: Game) => {
+    const handleWishlist = (g: Destination) => {
         if(g.isWishlist)
-            dispatch(addWishlistGame(g));
+            dispatch(addWishlistDestination(g));
         else{
-            dispatch(deleteWishlistGame(g.gameID));
-            dispatch(updateGame(g))
+            dispatch(deleteWishlistDestination(g.destinationID));
+            dispatch(updateDestination(g))
         }
     }
 
     return (
         <Grid container spacing={{xs: 2, md: 3}} columns={{xs: 4, sm: 8, md: 12}}>
             {wishlist.map(({
-                               platform,
-                               gameID,
-                               gameName,
-                               sales,
-                               releaseYear,
-                               company,
-                               rating,
+                               destinationID,
+                               destinationName,
+                               geolocation,
                                imageLink,
                                description,
                                isWishlist
                            }, index) => (
                 <Grid item xs={2} sm={4} md={4} key={index}>
-                    <VideoGameCard key={index}
-                                   platform={platform}
-                                   gameName={gameName}
-                                   sales={sales}
-                                   gameID={gameID}
-                                   releaseYear={releaseYear}
-                                   company={company}
-                                   rating={rating}
+                    <DestinationCard key={index}
+                                   destinationName={destinationName}
+                                   destinationID={destinationID}
+                                   geolocation={geolocation}
                                    onClickCallback={() => null}
-                                   deleteGameCallback={(gameID) => handleDeleteGame(gameID)}
+                                   deleteDestinationCallback={(gameID) => handleDeleteDestination(gameID)}
                                    wishlistCallback={({
-                                                          platform,
-                                                          gameID,
-                                                          gameName,
-                                                          sales,
-                                                          releaseYear,
-                                                          company,
-                                                          rating,
+                                                          destinationID,
+                                                          destinationName,
+                                                          geolocation,
                                                           imageLink,
                                                           description,
                                                           isWishlist
                                                       }) => handleWishlist({
-                                       platform,
-                                       gameID,
-                                       gameName,
-                                       sales,
-                                       releaseYear,
-                                       company,
-                                       rating,
+                                       destinationID,
+                                       destinationName,
+                                       geolocation,
                                        imageLink,
                                        description,
                                        isWishlist

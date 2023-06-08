@@ -1,27 +1,27 @@
-import {ADD_GAME_WISHLIST, UPDATE_GAME_WISHLIST, DELETE_GAME_WISHLIST} from "./types";
-import {Game} from "../../models/store";
+import { ADD_DESTINATION_WISHLIST, UPDATE_DESTINATION_WISHLIST, DELETE_DESTINATION_WISHLIST } from "./types";
+import { Destination } from "../../models/store";
 
-const addWishlistGame = (data: Game) => {
+const addWishlistDestination = (data: Destination) => {
     return {
-        type: ADD_GAME_WISHLIST,
+        type: ADD_DESTINATION_WISHLIST,
         payload: data
     };
 };
 
-const deleteWishlistGame = (data: number|null) => {
+const deleteWishlistDestination = (data: number|null) => {
     return {
-        type: DELETE_GAME_WISHLIST,
+        type: DELETE_DESTINATION_WISHLIST,
         payload: data
     };
 };
 
-const updateWishlistGame = (data: Game) => {
+const updateWishlistDestination = (data: Destination) => {
     return {
-        type: UPDATE_GAME_WISHLIST,
+        type: UPDATE_DESTINATION_WISHLIST,
         payload: data
 
     };
 };
 
 
-export {addWishlistGame, deleteWishlistGame, updateWishlistGame};
+export {addWishlistDestination, deleteWishlistDestination, updateWishlistDestination};
