@@ -46,7 +46,8 @@ function App() {
 
     );
 }
-
-// dreadful realisation ca versiunea mea nu e updated cu a ta si se vor fute branch-urile
-// nuj proiect
+// Redux persist
+// se fut payload-urile
+// si nu se salveaza in private reducer
+// delete account
 export default App;

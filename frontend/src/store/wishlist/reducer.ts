@@ -35,6 +35,8 @@ const wishlistReducer = (state: WishListState = initialState, action: any): Wish
                                     destination.geolocation = action.payload.geolocation
                                     destination.imageLink = action.payload.imageLink
                                     destination.description = action.payload.description
+                                    destination.startDate = action.payload.startDate
+                                    destination.endDate = action.payload.endDate
                                 }
                                 return destination;
                             }
