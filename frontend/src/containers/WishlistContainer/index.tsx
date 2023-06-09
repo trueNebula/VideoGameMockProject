@@ -3,7 +3,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {FrontLexStore, Destination} from "../../models/store";
 import Grid from '@mui/material/Grid';
 import DestinationCard from "../../components/DestinationCard";
-import {addWishlistDestination, deleteWishlistDestination} from "../../store/wishlist/actions";
+import {
+    addWishlistDestination,
+    deleteWishlistDestination,
+    updateWishlistDestination
+} from "../../store/wishlist/actions";
 import {updateDestination} from "../../store/destinations/actions";
 import {UserLogin} from "../../models/destination";
 import {updateDestinationPrivate} from "../../store/privatelist/actions";
@@ -19,6 +23,17 @@ const WishlistContainer: React.FC<UserLogin> = ({permissions}: UserLogin): React
 
     const handleDeleteDestination = (id: number) => {
         alert("Cannot delete game in wishlist menu!")
+    }
+
+    const handleUpdate = (g: Destination) => {
+        console.log("change in wishlist")
+        if (g.isWishlist) {
+            dispatch(updateDestinationPrivate(g));
+            dispatch(updateDestination(g))
+            dispatch(updateWishlistDestination(g))
+        } else if (permissions === "user") {
+            dispatch(updateDestinationPrivate(g));
+        } else dispatch(updateDestination(g))
     }
 
     const handleWishlist = (g: Destination) => {
@@ -41,7 +56,8 @@ const WishlistContainer: React.FC<UserLogin> = ({permissions}: UserLogin): React
                                geolocation,
                                imageLink,
                                description,
-                               isWishlist
+                               isWishlist,
+                               startDate, endDate
                            }, index) => (
                 <Grid item xs={2} sm={4} md={4} key={index}>
                     <DestinationCard key={index}
@@ -49,8 +65,13 @@ const WishlistContainer: React.FC<UserLogin> = ({permissions}: UserLogin): React
                                      destinationName={destinationName}
                                      destinationID={destinationID}
                                      geolocation={geolocation}
+                                     startDate={startDate}
+                                     endDate={endDate}
                                      onClickCallback={() => null}
                                      deleteDestinationCallback={(gameID) => handleDeleteDestination(gameID)}
+                                     updateCallback={(destination) => {
+                                         handleUpdate(destination)
+                                     }}
                                      wishlistCallback={({
                                                             destinationID,
                                                             destinationName,
@@ -64,7 +85,8 @@ const WishlistContainer: React.FC<UserLogin> = ({permissions}: UserLogin): React
                                          geolocation,
                                          imageLink,
                                          description,
-                                         isWishlist
+                                         isWishlist,
+                                         startDate, endDate
                                      })}
                                      imageLink={imageLink}
                                      description={description}

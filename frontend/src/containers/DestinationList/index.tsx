@@ -6,7 +6,11 @@ import Grid from '@mui/material/Grid';
 import {deleteDestination, updateDestination} from "../../store/destinations/actions";
 import {setDestination} from "../../store/destinationform/actions";
 import DestinationCard from "../../components/DestinationCard";
-import {addWishlistDestination, deleteWishlistDestination} from "../../store/wishlist/actions";
+import {
+    addWishlistDestination,
+    deleteWishlistDestination,
+    updateWishlistDestination
+} from "../../store/wishlist/actions";
 import {getDestinations} from "../../store/destinations/operations";
 import {UserLogin} from "../../models/destination";
 import {deleteDestinationPrivate, updateDestinationPrivate} from "../../store/privatelist/actions";
@@ -26,6 +30,18 @@ const DestinationList: React.FC<UserLogin> = ({permissions}: UserLogin): React.R
             // @ts-ignore
             dispatch(getDestinations())
     }, [])
+
+    const handleUpdate = (g: Destination) => {
+        console.log("change in regular")
+
+        if (g.isWishlist) {
+            dispatch(updateDestinationPrivate(g));
+            dispatch(updateDestination(g))
+            dispatch(updateWishlistDestination(g))
+        } else if (permissions === "user") {
+            dispatch(updateDestinationPrivate(g));
+        } else dispatch(updateDestination(g))
+    }
 
     const handleDeleteDestination = (id: number) => {
         dispatch(deleteDestination(id));
@@ -52,7 +68,8 @@ const DestinationList: React.FC<UserLogin> = ({permissions}: UserLogin): React.R
                                    destinationName,
                                    imageLink,
                                    description,
-                                   isWishlist
+                                   isWishlist,
+                                   startDate, endDate
                                }, index) => (
                 <Grid item xs={2} sm={4} md={4} key={index}>
                     <DestinationCard key={index}
@@ -60,6 +77,8 @@ const DestinationList: React.FC<UserLogin> = ({permissions}: UserLogin): React.R
                                      geolocation={geolocation}
                                      destinationName={destinationName}
                                      destinationID={destinationID}
+                                     startDate={startDate}
+                                     endDate={endDate}
                                      onClickCallback={({
                                                            destinationID,
                                                            destinationName,
@@ -73,9 +92,14 @@ const DestinationList: React.FC<UserLogin> = ({permissions}: UserLogin): React.R
                                          geolocation,
                                          imageLink,
                                          description,
-                                         isWishlist
+                                         isWishlist,
+                                         startDate,
+                                         endDate
                                      })}
                                      deleteDestinationCallback={(destinationID: number) => handleDeleteDestination(destinationID)}
+                                     updateCallback={(destination) => {
+                                         handleUpdate(destination)
+                                     }}
                                      wishlistCallback={({
                                                             destinationID,
                                                             destinationName,
@@ -87,7 +111,8 @@ const DestinationList: React.FC<UserLogin> = ({permissions}: UserLogin): React.R
                                          destinationName,
                                          geolocation,
                                          description,
-                                         imageLink, isWishlist
+                                         imageLink, isWishlist,
+                                         startDate, endDate
                                      })}
                                      imageLink={imageLink}
                                      description={description}

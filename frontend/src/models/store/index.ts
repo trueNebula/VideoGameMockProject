@@ -30,6 +30,8 @@ export interface Destination {
     imageLink: string,
     description: string
     isWishlist: boolean
+    startDate: string,
+    endDate: string
 }
 
 export interface FrontLexStore {

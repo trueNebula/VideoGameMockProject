@@ -8,7 +8,9 @@ const initialState = {
         destinationName: "",
         geolocation: "",
         description:"",
-        imageLink:""
+        imageLink:"",
+        startDate:"",
+        endDate:""
     } as Destination
 };
 

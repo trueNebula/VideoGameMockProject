@@ -16,8 +16,10 @@ interface Destination {
     destinationName: string,
     geolocation: string,
     imageLink: string,
-    description: string
-    isWishlist: boolean
+    description: string,
+    isWishlist: boolean,
+    startDate: string,
+    endDate: string
 }
 
 export interface DestinationRowProps extends Destination {
@@ -39,5 +41,6 @@ export interface LoginProps {
 
 export interface DestinationCardProps extends IconButtonProps, DestinationRowProps {
     wishlistCallback: (destination: Destination) => void
+    updateCallback: (destination: Destination) => void
 }
 

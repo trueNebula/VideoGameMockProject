@@ -9,6 +9,8 @@ const DestinationTableRow: React.FC<DestinationCardProps> = ({
                                                             geolocation,
                                                             description,
                                                             imageLink,
+                                                            endDate,
+                                                            startDate,
                                                             onClickCallback,
                                                             deleteDestinationCallback,
                                                             isFiltered,
@@ -28,7 +30,9 @@ const DestinationTableRow: React.FC<DestinationCardProps> = ({
             geolocation,
             imageLink,
             description,
-            isWishlist
+            isWishlist,
+            startDate,
+            endDate
         })
     }
 

@@ -20,6 +20,7 @@ const DestinationFormContainer: React.FC<UserLogin> = ({permissions}: UserLogin)
     } = useSelector((state: FrontLexStore) => state);
 
     const handleUpdate = (g: Destination) => {
+        console.log(g);
         if (g.isWishlist) {
             dispatch(updateDestinationPrivate(g));
             dispatch(updateDestination(g))
@@ -50,6 +51,8 @@ const DestinationFormContainer: React.FC<UserLogin> = ({permissions}: UserLogin)
             imageLink={destination.imageLink}
             description={destination.description}
             isWishlist={destination.isWishlist}
+            startDate={destination.startDate}
+            endDate={destination.endDate}
             createCallback={(destination) => {
                 handleCreate(destination)
             }}
@@ -63,6 +66,8 @@ const DestinationFormContainer: React.FC<UserLogin> = ({permissions}: UserLogin)
             imageLink={destination2.imageLink}
             description={destination2.description}
             isWishlist={destination2.isWishlist}
+            startDate={destination.startDate}
+            endDate={destination.endDate}
             createCallback={(destination) => {
                 handleCreate(destination)
             }}

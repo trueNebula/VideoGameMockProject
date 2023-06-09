@@ -28,6 +28,7 @@ const privateDestinationReducer = (state: PrivateDestinationsState = initialStat
                 };
 
             case UPDATE_DESTINATION_PRIVATE:
+                console.log(payload)
                 return {
                     ...state,
                     privateDestinations: [
@@ -38,6 +39,8 @@ const privateDestinationReducer = (state: PrivateDestinationsState = initialStat
                                     destination.imageLink = action.payload.imageLink
                                     destination.description = action.payload.description
                                     destination.isWishlist = action.payload.isWishlist
+                                    destination.startDate = action.payload.startDate
+                                    destination.endDate = action.payload.endDate
 
                                 }
                                 return destination;

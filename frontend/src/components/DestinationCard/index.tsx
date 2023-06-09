@@ -10,6 +10,9 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { DestinationCardProps } from "../../models/destination";
+import {TextField, FormControl} from "@mui/material";
+import Button from "@mui/material/Button";
+import {useState} from "react";
 
 const DestinationCard: React.FC<DestinationCardProps> = ({
                                                          destinationID,
@@ -17,8 +20,11 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
                                                          geolocation,
                                                          description,
                                                          imageLink,
+                                                         startDate,
+                                                         endDate,
                                                          onClickCallback,
                                                          wishlistCallback,
+                                                         updateCallback,
                                                          deleteDestinationCallback,
                                                          isWishlist,
                                                          permissions
@@ -40,7 +46,9 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
             geolocation,
             imageLink,
             description,
-            isWishlist
+            isWishlist,
+            startDate,
+            endDate
         })
     }
     const handleClickCallback = (e: any) => {
@@ -51,7 +59,31 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
             geolocation,
             imageLink,
             description,
-            isWishlist
+            isWishlist,
+            startDate,
+            endDate
+        })
+    }
+
+    const [selection, setSelection] = useState<{
+        startDate: string,
+        endDate: string
+    }>({
+        startDate: "",
+        endDate: ""
+    })
+
+    const handleInputSubmit = () => {
+        console.log(selection)
+        updateCallback({
+            destinationID: destinationID,
+            destinationName: destinationName,
+            geolocation: geolocation,
+            imageLink: imageLink,
+            description: description,
+            isWishlist: isWishlist,
+            startDate: selection.startDate,
+            endDate: selection.endDate
         })
     }
 
@@ -77,6 +109,36 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
                 <Typography variant="body2" color="text.secondary">
                     {description}
                 </Typography>
+
+                {isWishlist &&
+                    <>
+                        {/*
+                        <Typography variant="body1" color="text.primary">
+                            {startDate !== undefined ? `Starting on  ${startDate}` : "No start date chosen!"}
+                        </Typography>
+                        <Typography variant="body1" color="text.primary">
+                            {endDate !== undefined ? `Ending on  ${endDate}` : "No end date chosen!"}
+                        </Typography>
+                        */}
+                        <FormControl>
+                            <TextField label="Start Date"
+                                       value={selection.startDate ? selection.startDate : ""}
+                                       onChange={e => setSelection({
+                                           ...selection!,
+                                           startDate: e.target.value
+                                       })} type="text" placeholder=""/>
+                            <TextField label="End Date"
+                                       value={selection.endDate ? selection.endDate : ""}
+                                       onChange={e => setSelection({
+                                           ...selection!,
+                                           endDate: e.target.value
+                                       })} type="text" placeholder=""/>
+                            <Button  variant={"contained"} color={"success"} sx={{'width':'240px', 'height':'50px'}}
+                                     onClick={handleInputSubmit}>Update Dates</Button>
+                        </FormControl>
+
+                    </>
+                }
             </CardContent>
             <CardActions disableSpacing>
                 {permissions !== "admin" &&

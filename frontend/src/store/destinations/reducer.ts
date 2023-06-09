@@ -1,6 +1,7 @@
 import {CREATE_DESTINATION, DELETE_DESTINATION, UPDATE_DESTINATION} from "./types";
 import {Destination, DestinationsState} from "../../models/store";
 import {SET_DESTINATIONS} from "./types";
+import destinations from "../../pages/Destinations";
 
 
 const initialState = {
@@ -45,6 +46,8 @@ const destinationReducer = (state: DestinationsState = initialState, action: any
                                     destination.imageLink = action.payload.imageLink
                                     destination.description = action.payload.description
                                     destination.isWishlist = action.payload.isWishlist
+                                    destination.startDate = action.payload.startDate
+                                    destination.endDate = action.payload.endDate
 
                                 }
                                 return destination;

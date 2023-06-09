@@ -13,6 +13,8 @@ const VideoGameForm: React.FC<DestinationFormProps> = ({
                                                     description,
                                                     imageLink,
                                                     isWishlist,
+                                                    startDate,
+                                                    endDate,
                                                     updateCallback,
                                                     createCallback
                                                 }: DestinationFormProps): React.ReactElement => {
@@ -22,14 +24,18 @@ const VideoGameForm: React.FC<DestinationFormProps> = ({
         destinationName: string;
         geolocation: string;
         imageLink: string; description: string;
-        isWishlist: boolean
+        isWishlist: boolean,
+        startDate: string,
+        endDate: string
     }>({
         destinationID: null,
         destinationName: "",
         geolocation: "",
         imageLink: "",
         description: "",
-        isWishlist: false
+        isWishlist: false,
+        startDate: "",
+        endDate: ""
     })
 
     useEffect(() => setSelection({
@@ -38,8 +44,10 @@ const VideoGameForm: React.FC<DestinationFormProps> = ({
         geolocation: geolocation,
         imageLink: imageLink,
         description: description,
-        isWishlist: isWishlist
-    }), [destinationID, destinationName, geolocation, description, imageLink, isWishlist])
+        isWishlist: isWishlist,
+        startDate: startDate,
+        endDate: endDate
+    }), [destinationID, destinationName, geolocation, description, imageLink, isWishlist, startDate, endDate])
 
     const handleInputSubmit = () => {
         console.log(selection)
@@ -54,7 +62,9 @@ const VideoGameForm: React.FC<DestinationFormProps> = ({
             geolocation: "",
             description: "",
             imageLink: "",
-            isWishlist: false
+            isWishlist: false,
+            startDate: "",
+            endDate: ""
         })
     }
 
@@ -108,6 +118,30 @@ const VideoGameForm: React.FC<DestinationFormProps> = ({
                                           })} type="text" placeholder=""/>
                         </Container>
                     </Grid>
+                    {/*
+                    {selection.isWishlist &&
+                    <>
+                        <Grid item xs={6}>
+                            <Container sx={{'display':'inline-flex', 'flex-direction':'column'}}>
+                                <TextField label="Start Date" value={selection ? selection!.startDate : ""}
+                                           onChange={e => setSelection({
+                                               ...selection!,
+                                               startDate: e.target.value
+                                           })} type="text" placeholder=""/>
+                            </Container>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Container sx={{'display':'inline-flex', 'flex-direction':'column'}}>
+                                <TextField label="End Date" value={selection ? selection!.endDate : ""}
+                                           onChange={e => setSelection({
+                                               ...selection!,
+                                               endDate: e.target.value
+                                           })} type="text" placeholder=""/>
+                            </Container>
+                        </Grid>
+                    </>}
+                    */}
+
                     <Grid item xs={6}>
                         <Container sx={{'display': 'inline-flex', 'justify-content' : 'inline-flex', 'margin-top':'5px','gap': '20px', 'padding':'0px'}} >
                             <Button  variant={"contained"} color={"success"} sx={{'width':'240px', 'height':'50px'}}
